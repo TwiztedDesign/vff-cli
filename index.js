@@ -3,6 +3,7 @@
 const program   = require('commander'),
       serve     = require('./lib/serve'),
       login     = require('./lib/login');
+      logout    = require('./lib/logout');
 
 
 program
@@ -19,6 +20,10 @@ program
 program
     .command('login')
     .action(login);
+
+program
+    .command('logout')
+    .action(logout);
 
 
 
