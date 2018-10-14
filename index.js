@@ -2,7 +2,8 @@
 
 const program   = require('commander'),
       serve     = require('./lib/serve'),
-      login     = require('./lib/login');
+      login     = require('./lib/login'),
+      deploy    = require('./lib/deploy'),
       logout    = require('./lib/logout');
 
 
@@ -24,6 +25,10 @@ program
 program
     .command('logout')
     .action(logout);
+
+program
+    .command('deploy')
+    .action(deploy);
 
 
 
