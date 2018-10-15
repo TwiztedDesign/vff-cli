@@ -17,16 +17,23 @@ echo '<h1>Hello Videoflow</h1>' > index.html
 ```
 vff init
 ```
-You will be prompt for a few questions, you can't leave the default value by pressing the Enter key.
+You will be prompt for a few questions, you can leave the default value by pressing the Enter key.
 
 **CONGRATULATIONS**! You have created your first Videoflow overlay.
 
 Now let's deploy it:
+- First login with your Videoflow credentials
+```
+vff login
+```
+You will be prompt for your email and password
+- Ready to deploy
 ```
 vff deploy
 ``` 
 Done.
-You'r brand new overlay should appear under the 'Overlays' section in your Videoflow dashboard.
+
+You're brand new overlay should appear under the 'Overlays' section in your Videoflow dashboard.
 
 
 ## Commands
