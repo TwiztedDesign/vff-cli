@@ -29,6 +29,9 @@ program
     .command('init')
     .action(require('./bin/init'));
 
+program
+    .command('create')
+    .action(require('./bin/create'));
 
 program.parse(process.argv);
 

@@ -39,6 +39,7 @@ You're brand new overlay should appear under the 'Overlays' section in your Vide
 ## Commands
 
 ### init
+### create
 ### login
 ### logout
 ### serve
