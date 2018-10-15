@@ -1,38 +1,33 @@
 #!/usr/bin/env node
 
-const program   = require('commander'),
-      serve     = require('./lib/serve'),
-      login     = require('./lib/login'),
-      deploy    = require('./lib/deploy'),
-      logout    = require('./lib/logout');
-
+const program   = require('commander');
 
 program
     .version('0.0.1');
+
+program
+    .command('login')
+    .action(require('./bin/login'));
+
+program
+    .command('logout')
+    .action(require('./bin/logout'));
+
 program
     .command('serve')
     .description("Serve the current folder")
     .option("-p, --port <port>", "set port")
     .option("-d, --dir <path>", "set directory")
     .option("-e, --entry <entry>", "set entry file")
-    .action(serve);
-
-
-program
-    .command('login')
-    .action(login);
-
-program
-    .command('logout')
-    .action(logout);
+    .action(require('./bin/serve'));
 
 program
     .command('deploy')
-    .action(deploy);
+    .action(require('./bin/deploy'));
 
-
-
-
+program
+    .command('init')
+    .action(require('./bin/init'));
 
 
 program.parse(process.argv);
