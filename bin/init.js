@@ -15,7 +15,6 @@ module.exports = function () {
     inquirer
         .prompt(questions)
         .then(function (answers) {
-            console.log('writing vff.json to: ',path.resolve('./') + '/vff.json');
             fs.writeFile(path.resolve('./') + '/vff.json', JSON.stringify(answers, null, 4), 'utf8', () => {});
         });
 };
