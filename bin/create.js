@@ -24,6 +24,7 @@ module.exports = function () {
                 }
                 answers.main = 'index.html';
                 answers.version = '1.0.0';
+                delete answers.type;
                 fs.writeFile(path.resolve('./') + '/vff.json', JSON.stringify(answers, null, 4), 'utf8', () => {
                     utils.logger.done();
                 });
