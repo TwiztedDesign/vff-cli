@@ -32,11 +32,10 @@ module.exports = (directory, options) => {
             vf.serve(url);
         });
     });
+
+    process.on('SIGINT', function() {
+        vf.serve('tear_down',()=>{
+            process.exit();
+        });
+    })
 };
-
-
-
-
-
-
-
