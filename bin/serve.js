@@ -29,12 +29,13 @@ module.exports = (directory, options) => {
                 console.log('Error:', err);
             }
             console.log('Ngrok:', url);
-            vf.serve(url);
+
+            vf.serve(url,descriptor);
         });
     });
 
     process.on('SIGINT', function() {
-        vf.serve('tear_down',()=>{
+        vf.serve('tear_down', {}, () => {
             process.exit();
         });
     })
