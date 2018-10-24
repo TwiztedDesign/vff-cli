@@ -10,6 +10,7 @@ const messages      = require('../lib/config').messages;
 
 module.exports = (directory) => {
     let descriptor = utils.getDescriptor();
+    let servedOverlay = {};
     let port = directory.port || defaultPort;
     let path = dir + (directory.path || '');
     let entry = directory.entry || descriptor? descriptor.main : null || 'index.html';
@@ -40,7 +41,8 @@ module.exports = (directory) => {
         logger.info('Local Videoflow:  http://localhost:3002/dev/' + url.replace("https://", "").split('.')[0] + '/');
         logger.info('Videoflow:        https://videoflow.io/dev/' + url.replace("https://", "").split('.')[0] + '/');
         vf.serve(url,descriptor)
-            .then(() => {
+            .then((response) => {
+                servedOverlay = response.data.overlay;
                 logger.success(messages.serveSuccess);
             })
             .catch((err) => {
@@ -51,7 +53,8 @@ module.exports = (directory) => {
     });
 
     process.on('SIGINT', () => {
-        vf.serve('tear_down', {}).then(() => {
+        delete servedOverlay.url;
+        vf.serve('tear_down', servedOverlay).then(() => {
             process.exit();
         }).catch(() => {
             process.exit();
