@@ -5,8 +5,10 @@ const dir           = require('path').resolve('./');
 const vf            = require('../lib/vf');
 const defaultPort   = require('../lib/config').defaultServePort;
 const utils         = require('../lib/utils');
+const logger        = require('../lib/logger');
+const messages      = require('../lib/config').messages;
 
-module.exports = (directory, options) => {
+module.exports = (directory) => {
     let descriptor = utils.getDescriptor();
     let port = directory.port || defaultPort;
     let path = dir + (directory.path || '');
@@ -22,20 +24,29 @@ module.exports = (directory, options) => {
         });
 
     app.listen(port, function() {
-        console.log('Serving:', path + '/' + entry);
-        console.log('Local: http://localhost:' + port);
+        logger.success('Serving: ' + path + '/' + entry);
+        logger.info('Local: http://localhost:' + port);
         ngrok.connect(port,function (err, url){
             if (err !== null) {
-                console.log('Error:', err);
+                logger.error(err);
             }
-            console.log('Ngrok:', url);
-
-            vf.serve(url,descriptor);
+            logger.info('Ngrok: ' + url);
+            vf.serve(url,descriptor)
+                .then(() => {
+                    logger.success(messages.serveSuccess);
+                })
+                .catch((err) => {
+                    if(err.response.status === 401){
+                        logger.warn(messages.serveNoAuth);
+                    }
+                });
         });
     });
 
     process.on('SIGINT', function() {
-        vf.serve('tear_down', {}, () => {
+        vf.serve('tear_down', {}).then(() => {
+            process.exit();
+        }).catch(() => {
             process.exit();
         });
     })
