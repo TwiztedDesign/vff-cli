@@ -15,7 +15,7 @@ module.exports = (directory) => {
     let entry = directory.entry || descriptor? descriptor.main : null || 'index.html';
     app
         .use(express.static(path))
-        .use("/", function(req, res, next){
+        .use("/", (req, res, next) => {
             if(req.path === '/'){
                 res.sendFile(entry, { root: path + "/" });
             } else {
@@ -23,27 +23,34 @@ module.exports = (directory) => {
             }
         });
 
-    app.listen(port, function() {
+    app.listen(port, () => {
         logger.success('Serving: ' + path + '/' + entry);
-        logger.info('Local: http://localhost:' + port);
-        ngrok.connect(port,function (err, url){
-            if (err !== null) {
-                logger.error(err);
-            }
-            logger.info('Ngrok: ' + url);
-            vf.serve(url,descriptor)
-                .then(() => {
-                    logger.success(messages.serveSuccess);
-                })
-                .catch((err) => {
-                    if(err.response.status === 401){
-                        logger.warn(messages.serveNoAuth);
-                    }
-                });
-        });
+        logger.info('Local:            http://localhost:' + port);
+    }).on('error', (err) => {
+        if(err.code === 'EADDRINUSE') {
+            logger.error(messages.addrInUse);
+        }
     });
 
-    process.on('SIGINT', function() {
+    ngrok.connect(port, (err, url) =>{
+        if (err !== null) {
+            logger.error(err);
+        }
+        logger.info('Ngrok:            ' + url);
+        logger.info('Local Videoflow:  http://localhost:3002/dev/' + url.replace("https://", "").split('.')[0] + '/');
+        logger.info('Videoflow:        https://videoflow.io/dev/' + url.replace("https://", "").split('.')[0] + '/');
+        vf.serve(url,descriptor)
+            .then(() => {
+                logger.success(messages.serveSuccess);
+            })
+            .catch((err) => {
+                if(err.response.status === 401){
+                    logger.warn(messages.serveNoAuth);
+                }
+            });
+    });
+
+    process.on('SIGINT', () => {
         vf.serve('tear_down', {}).then(() => {
             process.exit();
         }).catch(() => {
