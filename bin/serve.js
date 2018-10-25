@@ -1,11 +1,12 @@
-const ngrok         = require('ngrok');
-const dir           = require('path').resolve('./');
-const vf            = require('../lib/vf');
-const defaultPort   = require('../lib/config').defaultServePort;
-const utils         = require('../lib/utils');
-const logger        = require('../lib/logger');
-const messages      = require('../lib/config').messages;
-const browserSync   = require('browser-sync').create();
+const ngrok             = require('ngrok');
+const dir               = require('path').resolve('./');
+const vf                = require('../lib/vf');
+const defaultPort       = require('../lib/config').defaultServePort;
+const keepAliveInterval = require('../lib/config').keepAliveInterval;
+const utils             = require('../lib/utils');
+const logger            = require('../lib/logger');
+const messages          = require('../lib/config').messages;
+const browserSync       = require('browser-sync').create();
 
 module.exports = (directory) => {
     let descriptor = utils.getDescriptor();
@@ -49,7 +50,6 @@ module.exports = (directory) => {
                 logger.error(err);
             }
         }
-
     });
 
     process.on('SIGINT', () => {
@@ -59,5 +59,16 @@ module.exports = (directory) => {
         }).catch(() => {
             process.exit();
         });
-    })
+    });
+
+    //Keep alive loop
+    try {
+        setInterval(function () {
+            var overlayToSend = Object.assign({}, servedOverlay);
+            delete overlayToSend.url;
+            vf.serve('keep_alive', overlayToSend);
+        }, keepAliveInterval);
+    } catch (err) {
+        logger.error(err);
+    }
 };
