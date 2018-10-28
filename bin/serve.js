@@ -6,6 +6,8 @@ const utils         = require('../lib/utils');
 const logger        = require('../lib/logger');
 const messages      = require('../lib/config').messages;
 const browserSync   = require('browser-sync').create();
+const spawn         = require('child_process').spawn;
+const teardownPath  = require('path').resolve(__dirname + '/../lib/teardown.js');
 
 module.exports = (directory) => {
     let descriptor = utils.getDescriptor();
@@ -30,9 +32,10 @@ module.exports = (directory) => {
 
             try{
                 const url = await ngrok.connect(port);
+                const ngrokKey = url.replace("https://", "").split('.')[0];
                 logger.info('Ngrok:            ' + url);
-                logger.info('Local Videoflow:  http://localhost:3002/dev/' + url.replace("https://", "").split('.')[0] + '/');
-                logger.info('Videoflow:        https://videoflow.io/dev/' + url.replace("https://", "").split('.')[0] + '/');
+                logger.info('Videoflow:        https://dev.videoflow.io/' + ngrokKey + '/');
+
                 vf.serve(url,descriptor)
                     .then(() => {
                         logger.success(messages.serveSuccess);
@@ -51,10 +54,7 @@ module.exports = (directory) => {
     });
 
     process.on('SIGINT', () => {
-        vf.serve('tear_down', {}).then(() => {
-            process.exit();
-        }).catch(() => {
-            process.exit();
-        });
+        spawn('node', [teardownPath]);
+        process.exit();
     })
 };
