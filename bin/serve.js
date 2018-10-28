@@ -33,7 +33,7 @@ module.exports = (directory) => {
             try{
                 const url = await ngrok.connect(port);
                 const ngrokKey = url.replace("https://", "").split('.')[0];
-                logger.info('Ngrok:            ' + url);
+                logger.info('Remote:           ' + url);
                 logger.info('Videoflow:        https://dev.videoflow.io/' + ngrokKey + '/');
 
                 vf.serve(url,descriptor)
@@ -47,7 +47,7 @@ module.exports = (directory) => {
                     });
 
             } catch(err){
-                logger.error(err);
+                logger.error(messages.ngrokError);
             }
         }
 
