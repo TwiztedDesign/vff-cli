@@ -58,6 +58,8 @@ module.exports = (directory) => {
             process.exit();
         }).catch(() => {
             process.exit();
+        }).finally(()=> {
+            process.exit();
         });
     });
 
