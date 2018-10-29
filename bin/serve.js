@@ -56,11 +56,16 @@ module.exports = (directory) => {
     });
 
     process.on('SIGINT', () => {
-        spawn('node', [teardownPath]);
-        process.exit();
+        delete servedOverlay.url;
+        vf.serve('tear_down', servedOverlay).then(() => {
+            process.exit();
+        }).catch(() => {
+            process.exit();
+        });
+        //TODO: running the teardownPath with the servedOverlay object
+        // spawn('node', [teardownPath]);
+        // process.exit();
     });
-    // delete servedOverlay.url;
-    // vf.serve('tear_down', servedOverlay)
 
     //Keep alive loop
     try {
