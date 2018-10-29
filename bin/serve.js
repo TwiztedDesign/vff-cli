@@ -42,7 +42,11 @@ module.exports = (directory) => {
                 logger.info('Videoflow:        https://dev.videoflow.io/' + ngrokKey + '/');
 
                 vf.serve(url,descriptor)
-                    .then(() => {
+                    .then((res) => {
+                        let overlay = res.data.overlay;
+                        descriptor.serve_id = overlay.serve_id;
+                        utils.saveDescriptor(descriptor);
+
                         logger.success(messages.serveSuccess);
                     })
                     .catch((err) => {
