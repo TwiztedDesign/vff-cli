@@ -11,6 +11,9 @@ const teardownPath  = require('path').resolve(__dirname + '/../lib/teardown.js')
 
 module.exports = (directory) => {
     let descriptor = utils.getDescriptor();
+    if(!descriptor) {
+        return logger.error(messages.serveWithoutInit);
+    }
     let port = directory.port || defaultPort;
     let path = dir + (directory.path || '');
     let entry = directory.entry || descriptor? descriptor.main : null || 'index.html';
