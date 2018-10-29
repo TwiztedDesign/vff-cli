@@ -44,7 +44,7 @@ module.exports = (directory) => {
                 vf.serve(url,descriptor)
                     .then((res) => {
                         let overlay = res.data.overlay;
-                        descriptor.serve_id = overlay.serve_id;
+                        descriptor.serve_id = overlay.id;
                         utils.saveDescriptor(descriptor);
 
                         logger.success(messages.serveSuccess);
