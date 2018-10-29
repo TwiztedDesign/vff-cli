@@ -9,13 +9,13 @@ const messages          = require('../lib/config').messages;
 const browserSync       = require('browser-sync').create();
 const spawn             = require('child_process').spawn;
 const teardownPath      = require('path').resolve(__dirname + '/../lib/teardown.js');
+const descriptor        = utils.getDescriptor();
 
 module.exports = (directory) => {
-    let descriptor = utils.getDescriptor();
+
     if(!descriptor) {
         return logger.error(messages.serveWithoutInit);
     }
-    let servedOverlay = {};
     let port = directory.port || defaultPort;
     let path = dir + (directory.path || '');
     let entry = directory.entry || descriptor? descriptor.main : null || 'index.html';
@@ -42,8 +42,7 @@ module.exports = (directory) => {
                 logger.info('Videoflow:        https://dev.videoflow.io/' + ngrokKey + '/');
 
                 vf.serve(url,descriptor)
-                    .then((response) => {
-                        servedOverlay = response.data.overlay;
+                    .then(() => {
                         logger.success(messages.serveSuccess);
                     })
                     .catch((err) => {
@@ -59,25 +58,13 @@ module.exports = (directory) => {
     });
 
     process.on('SIGINT', () => {
-        delete servedOverlay.url;
-        vf.serve('tear_down', servedOverlay).then(() => {
-            process.exit();
-        }).catch(() => {
-            process.exit();
-        });
-        //TODO: running the teardownPath with the servedOverlay object
-        // spawn('node', [teardownPath]);
-        // process.exit();
+        spawn('node', [teardownPath]);
+        process.exit();
     });
 
     //Keep alive loop
-    try {
-        setInterval(function () {
-            var overlayToSend = Object.assign({}, servedOverlay);
-            delete overlayToSend.url;
-            vf.serve('keep_alive', overlayToSend);
-        }, keepAliveInterval);
-    } catch (err) {
-        logger.error(err);
-    }
+    setInterval(function () {
+        console.log('keeping alive');
+        vf.serve('keep_alive', descriptor);
+    }, keepAliveInterval);
 };
