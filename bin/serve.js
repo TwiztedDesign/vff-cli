@@ -12,6 +12,9 @@ const teardownPath      = require('path').resolve(__dirname + '/../lib/teardown.
 
 module.exports = (directory) => {
     let descriptor = utils.getDescriptor();
+    if(!descriptor) {
+        return logger.error(messages.serveWithoutInit);
+    }
     let servedOverlay = {};
     let port = directory.port || defaultPort;
     let path = dir + (directory.path || '');
