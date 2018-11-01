@@ -1,13 +1,16 @@
-const inquirer  = require('inquirer');
-const path      = require('path');
-const fs        = require('fs');
-const ncp       = require('ncp').ncp;
-const utils     = require('../lib/utils');
-const logger    = require('../lib/logger');
+const inquirer          = require('inquirer');
+const path              = require('path');
+const fs                = require('fs');
+const ncp               = require('ncp').ncp;
+const utils             = require('../lib/utils');
+const logger            = require('../lib/logger');
+const boilerplatesPath  = "/../boilerplates/";
+const boilerplates      = fs.readdirSync(path.resolve(__dirname + boilerplatesPath));
 
-    questions = [
+
+questions = [
         { type: 'input', name: 'name', message: 'Name:', default: path.basename(path.resolve('./')) },
-        { type: 'list', name: 'type', message: 'Type (more coming soon):', default: 'basic', choices: ['basic'] },
+        { type: 'list', name: 'type', message: 'Type (more coming soon):', default: 'basic', choices: boilerplates },
     ];
 
 module.exports = function () {
@@ -19,8 +22,9 @@ module.exports = function () {
         .then(function (answers) {
             ncp.limit = 16;
             logger.run('Creating vff project');
-            ncp(path.resolve(__dirname + '/../boilerplates/' + answers.type), path.resolve('./'), function (err) {
+            ncp(path.resolve(__dirname + boilerplatesPath + answers.type), path.resolve('./'), function (err) {
                 if (err) {
+                    console.log(err);
                     return logger.done(err);
                 }
                 answers.main = 'index.html';

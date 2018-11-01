@@ -68,7 +68,6 @@ module.exports = (directory) => {
 
     //Keep alive loop
     setInterval(function () {
-        console.log('keeping alive');
         vf.serve('keep_alive', descriptor);
     }, keepAliveInterval);
 };

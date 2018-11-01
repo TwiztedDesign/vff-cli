@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://rawgit.com/TwiztedDesign/vff/master/dist/vff.js"></script>
+
+    <title>Videoflow Overlay</title>
+</header>
+<body>
+<main>
+    <div id="animation-1" class="animation" vff-template="lowerThird1">
+        <div class="red">/</div>
+        <div class="white light mask">
+            <div vff-name="firstName">Frederic</div>
+        </div>
+        <div class="white light mask">
+            <div vff-name="lastName">Colins</div>
+        </div>
+    </div>
+
+    <div id="animation-2" class="animation" vff-template="lowerThird2">
+        <div class="red bold arimo mask">
+            <div vff-name="fullName">John Doe</div>
+        </div>
+        <div class="white light mask">
+            <div vff-name="position">Motion Designer</div>
+        </div>
+    </div>
+
+    <div id="animation-3" class="animation" vff-template="lowerThird3">
+        <div class="white light mask">
+            <div vff-name="firstName">Sarah</div>
+        </div><div class="red bold arimo mask">
+        <div vff-name="lastName">Brown</div>
+    </div>
+    </div>
+
+    <div id="animation-4" class="animation" vff-template="lowerThird4">
+        <div class="white bold arimo mask">
+            <div vff-name="fullName">John Doe</div>
+        </div>
+        <div class="mask"><div></div></div>
+    </div>
+
+    <div id="animation-5" class="animation" vff-template="lowerThird5">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <defs>
+                <clipPath id="mask-bottom-right">
+                    <rect class="clip-path" x="70%" y="0" width="30%" height="100%"/>
+                </clipPath>
+                <clipPath id="mask-top">
+                    <rect class="clip-path" x="0" y="0" width="100%" height="100%"/>
+                </clipPath>
+                <clipPath id="mask-bottom-left">
+                    <rect class="clip-path" x="0" y="0" width="30%" height="100%"/>
+                </clipPath>
+            </defs>
+
+            <line class="bottom-right" x1="70%" y1="100%" x2="100%" y2="100%"/>
+            <line class="right" x1="100%" y1="0" x2="100%" y2="100%"/>
+            <line class="top" x1="0" y1="0" x2="100%" y2="0"/>
+            <line class="left" x1="0" y1="0" x2="0" y2="100%"/>
+            <line class="bottom-left" x1="0" y1="100%" x2="30%" y2="100%"/>
+        </svg>
+        <div class="white bold arimo mask">
+            <div vff-name="fullName">Nathan Fillion</div>
+        </div>
+        <div class="white mask">
+            <div vff-name="position">Director</div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
