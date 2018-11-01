@@ -33,6 +33,10 @@ program
     .command('create')
     .action(require('./bin/create'));
 
+program
+    .command('status')
+    .action(require('./bin/status'));
+
 program.parse(process.argv);
 
 // if program was called with no arguments, show help.
