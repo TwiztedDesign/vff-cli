@@ -1,14 +1,14 @@
 const ngrok             = require('ngrok');
 const dir               = require('path').resolve('./');
 const vf                = require('../lib/vf');
-const defaultPort       = require('../lib/config').defaultServePort;
-const keepAliveInterval = require('../lib/config').keepAliveInterval;
 const utils             = require('../lib/utils');
+const config            = utils.config();
+const defaultPort       = config.defaultServePort;
+const keepAliveInterval = config.keepAliveInterval;
 const logger            = require('../lib/logger');
-const messages          = require('../lib/config').messages;
+const messages          = config.messages;
+const tearDownTimeout   = config.tearDownTimeout;
 const browserSync       = require('browser-sync').create();
-const spawn             = require('child_process').spawn;
-const teardownPath      = require('path').resolve(__dirname + '/../lib/teardown.js');
 const descriptor        = utils.getDescriptor();
 
 module.exports = (directory) => {
@@ -50,8 +50,10 @@ module.exports = (directory) => {
                         logger.success(messages.serveSuccess);
                     })
                     .catch((err) => {
-                        if(err.response.status === 401){
+                        if(err.response && err.response.status === 401){
                             logger.warn(messages.serveNoAuth);
+                        }else{
+                            logger.error(err);
                         }
                     });
 
@@ -61,9 +63,32 @@ module.exports = (directory) => {
         }
     });
 
+    function tearDown() {
+        logger.run('Stopping...');
+        vf.serve('tear_down', descriptor || {}).then(() => {
+            logger.done();
+            process.exit();
+        }).catch((err) => {
+            logger.done({});
+            logger.error(`Error - ${err}`);
+            process.exit();
+        });
+
+        setTimeout(() => {
+            logger.done({});
+            logger.error("Timeout - No response from server");
+            process.exit();
+        }, tearDownTimeout);
+    }
+
     process.on('SIGINT', () => {
-        spawn('node', [teardownPath]);
-        process.exit();
+        tearDown();
+    });
+    process.on("SIGTERM", function() {
+        tearDown();
+    });
+    process.on("SIGUSR2", function() {
+        tearDown();
     });
 
     //Keep alive loop

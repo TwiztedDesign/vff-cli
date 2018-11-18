@@ -1,0 +1,24 @@
+{
+    "baseUrl": "https://www.videoflow.io/",
+    "environments": {
+        "Development": "http://localhost:3002/",
+        "Staging": "https://staging.videoflow.io/",
+        "Production": "https://www.videoflow.io/"
+    },
+    "credentials": "/../cred.json",
+    "defaultServePort": 5454,
+    "keepAliveInterval": 60000,
+    "tearDownTimeout": 5000,
+    "messages": {
+        "authSuccess": "Authentication successful",
+        "authFail": "Authentication error",
+        "logoutSuccess": "Logged out",
+        "missingDescriptor": "Missing vff.json file, run \"vff init\" to initialize a vff project",
+        "noAuth": "You are not logged in, use \"vff login\" and try again",
+        "serveNoAuth": "The overlay will not be accessible in https://videoflow.io, please login with \"vff login\"",
+        "serveWithoutInit": "You are trying the serve non vff overlay, use 'vff init' or 'vff create' first",
+        "serveSuccess": "To view the overlay live, go to https://videoflow.io",
+        "addrInUse": "You are already serving and overlay",
+        "ngrokError": "Remote serving could not be initiated, please check your network connection and try again"
+    }
+}

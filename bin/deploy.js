@@ -1,7 +1,8 @@
 const utils     = require('../lib/utils');
 const logger    = require('../lib/logger');
 const vf        = require('../lib/vf');
-const messages  = require('../lib/config').messages;
+const config    = utils.config();
+const messages  = config.messages;
 const fs        = require('fs');
 const path      = require('path');
 

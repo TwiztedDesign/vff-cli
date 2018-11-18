@@ -37,6 +37,10 @@ program
     .command('status')
     .action(require('./bin/status'));
 
+program
+    .command('env')
+    .action(require('./bin/env'));
+
 program.parse(process.argv);
 
 // if program was called with no arguments, show help.
