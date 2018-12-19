@@ -19,6 +19,7 @@
         "serveWithoutInit": "You are trying the serve non vff overlay, use 'vff init' or 'vff create' first",
         "serveSuccess": "To view the overlay live, go to https://videoflow.io",
         "addrInUse": "You are already serving and overlay",
+        "connectionError": "Can't connect to Videoflow server",
         "ngrokError": "Remote serving could not be initiated, please check your network connection and try again"
     }
 }

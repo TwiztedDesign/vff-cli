@@ -105,6 +105,9 @@ module.exports = (directory) => {
 
     //Keep alive loop
     setInterval(function () {
-        vf.serve('keep_alive', descriptor);
+        vf.serve('keep_alive', descriptor)
+            .catch(err => {
+                logger.error(messages.connectionError);
+            });
     }, keepAliveInterval);
 };
