@@ -4,7 +4,8 @@
   "description": "VFF CLI tool",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "node ./packaging.js"
   },
   "bin": {
     "vff": "./index.js"
@@ -23,5 +24,13 @@
     "ora": "3.0.0",
     "swank": "1.2.0"
   },
-  "preferGlobal": true
+  "devDependencies": {
+    "electron-wix-msi": "^2.1.1",
+    "pkg": "^4.3.5"
+  },
+  "preferGlobal": true,
+  "pkg": {
+    "scripts": "./index.js",
+    "assets": "boilerplates/**/*"
+  }
 }
