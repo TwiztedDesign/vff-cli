@@ -6,7 +6,7 @@ const environments      = config.environments;
 const environmentsKeys  = Object.keys(environments);
 
 
-questions = [
+const questions = [
     { type: 'list', name: 'env', message: 'Environments:', default: 'basic', choices: environmentsKeys },
 ];
 

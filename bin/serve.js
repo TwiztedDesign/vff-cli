@@ -38,8 +38,8 @@ module.exports = (directory) => {
             try{
                 const url = await ngrok.connect(port);
                 const ngrokKey = url.replace("https://", "").split('.')[0];
-                logger.info('Remote:           ' + url);
-                logger.info('Videoflow:        https://dev.videoflow.io/' + ngrokKey + '/');
+                // logger.info('Remote:           ' + url);
+                logger.info('Remote:           https://dev.videoflow.io/' + ngrokKey + '/');
 
                 vf.serve(url,descriptor)
                     .then((res) => {
@@ -47,7 +47,7 @@ module.exports = (directory) => {
                         descriptor.serve_id = overlay.id;
                         utils.saveDescriptor(descriptor);
 
-                        logger.success(messages.serveSuccess);
+                        // logger.success(messages.serveSuccess);
                     })
                     .catch((err) => {
                         if(err.response && err.response.status === 401){
