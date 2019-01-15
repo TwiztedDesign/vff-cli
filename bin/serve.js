@@ -27,6 +27,7 @@ module.exports = (directory) => {
         ui      : false,
         index   : entry,
         logLevel: "silent",
+        ghostMode: false,
         watch   : true,
     }, async function (err) {
         if(err){
