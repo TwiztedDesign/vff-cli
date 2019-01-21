@@ -29,6 +29,7 @@ module.exports = (directory) => {
         logLevel: "silent",
         ghostMode: false,
         watch   : true,
+        reloadDebounce: 2000,
     }, async function (err) {
         if(err){
             logger.error(err);
