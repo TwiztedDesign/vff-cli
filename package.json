@@ -25,7 +25,6 @@
     "swank": "1.2.0"
   },
   "devDependencies": {
-    "electron-wix-msi": "^2.1.1",
     "pkg": "^4.3.5"
   },
   "preferGlobal": true,
