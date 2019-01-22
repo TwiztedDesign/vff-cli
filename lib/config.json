@@ -20,6 +20,13 @@
         "serveSuccess": "To view the overlay live, go to https://videoflow.io",
         "addrInUse": "You are already serving and overlay",
         "connectionError": "Can't connect to Videoflow server",
-        "ngrokError": "Remote serving could not be initiated, please check your network connection and try again"
+        "tunnelError": "Remote serving could not be initiated, please check your network connection and try again"
+    },
+    "tunnel" : {
+        "host" : "serveo.net",
+        "dstPort": 80,
+        "srcHost": "localhost",
+        "srcPort": 5454,
+        "tryKeyboard" : true
     }
 }

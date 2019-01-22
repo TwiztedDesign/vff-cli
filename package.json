@@ -20,8 +20,8 @@
     "commander": "2.19.0",
     "inquirer": "6.2.0",
     "ncp": "2.0.0",
-    "ngrok": "3.1.0",
     "ora": "3.0.0",
+    "reverse-tunnel-ssh": "1.1.0",
     "swank": "1.2.0"
   },
   "devDependencies": {

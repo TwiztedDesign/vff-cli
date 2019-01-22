@@ -8,7 +8,7 @@ const boilerplatesPath  = "/../boilerplates/";
 const boilerplates      = fs.readdirSync(path.resolve(__dirname + boilerplatesPath));
 
 
-questions = [
+const questions = [
         { type: 'input', name: 'name', message: 'Name:', default: path.basename(path.resolve('./')) },
         { type: 'list', name: 'type', message: 'Type (more coming soon):', default: 'basic', choices: boilerplates },
     ];
