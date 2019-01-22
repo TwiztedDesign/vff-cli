@@ -1,4 +1,3 @@
-const ngrok             = require('ngrok');
 const dir               = require('path').resolve('./');
 const vf                = require('../lib/vf');
 const utils             = require('../lib/utils');
@@ -10,6 +9,10 @@ const messages          = config.messages;
 const tearDownTimeout   = config.tearDownTimeout;
 const browserSync       = require('browser-sync').create();
 const descriptor        = utils.getDescriptor();
+const tunnel            = require('../lib/tunnel');
+
+
+
 
 module.exports = (directory) => {
 
@@ -37,30 +40,27 @@ module.exports = (directory) => {
             logger.success('Serving: ' + path + '/' + entry);
             logger.info('Local:            http://localhost:' + port);
 
+
+            tunnel.start();
             try{
-                const url = await ngrok.connect(port);
-                const ngrokKey = url.replace("https://", "").split('.')[0];
-                // logger.info('Remote:           ' + url);
-                logger.info('Remote:           https://dev.videoflow.io/' + ngrokKey + '/');
-
-                vf.serve(url,descriptor)
-                    .then((res) => {
-                        let overlay = res.data.overlay;
-                        descriptor.serve_id = overlay.id;
-                        utils.saveDescriptor(descriptor);
-
-                        // logger.success(messages.serveSuccess);
-                    })
-                    .catch((err) => {
-                        if(err.response && err.response.status === 401){
-                            logger.warn(messages.serveNoAuth);
-                        }else{
-                            logger.error(err);
-                        }
-                    });
-
+                tunnel.start({srcPort: port}).then(url => {
+                    logger.info('Remote:           ' + url);
+                    vf.serve(url,descriptor)
+                        .then((res) => {
+                            let overlay = res.data.overlay;
+                            descriptor.serve_id = overlay.id;
+                            utils.saveDescriptor(descriptor);
+                        })
+                        .catch((err) => {
+                            if(err.response && err.response.status === 401){
+                                logger.warn(messages.serveNoAuth);
+                            }else{
+                                logger.error(err);
+                            }
+                        });
+                }) ;
             } catch(err){
-                logger.error(messages.ngrokError);
+                logger.error(messages.tunnelError);
             }
         }
     });
