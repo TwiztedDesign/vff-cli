@@ -5,7 +5,7 @@
         "Staging": "https://staging.videoflow.io/",
         "Production": "https://www.videoflow.io/"
     },
-    "credentials": "/../cred.json",
+    "credentials": "/vffcred.json",
     "defaultServePort": 5454,
     "keepAliveInterval": 60000,
     "tearDownTimeout": 5000,
