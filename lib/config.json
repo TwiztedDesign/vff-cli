@@ -2,7 +2,6 @@
     "baseUrl": "https://www.videoflow.io/",
     "environments": {
         "Development": "http://localhost:3002/",
-        "Staging": "https://staging.videoflow.io/",
         "Production": "https://www.videoflow.io/"
     },
     "credentials": "/vffcred.json",
@@ -27,6 +26,7 @@
         "dstPort": 80,
         "srcHost": "localhost",
         "srcPort": 5454,
-        "tryKeyboard" : true
+        "tryKeyboard" : true,
+        "keepaliveInterval" : 1000
     }
 }

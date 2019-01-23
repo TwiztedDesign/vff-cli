@@ -41,7 +41,6 @@ module.exports = (directory) => {
             logger.info('Local:            http://localhost:' + port);
 
 
-            tunnel.start();
             try{
                 tunnel.start({srcPort: port}).then(url => {
                     logger.info('Remote:           ' + url);
