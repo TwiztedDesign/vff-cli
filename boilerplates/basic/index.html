@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="https://rawgit.com/TwiztedDesign/vff/master/dist/vff.js"></script>
+    <script src="https://unpkg.com/vff"></script>
     <script src="js/script.js"></script>
     <title>Videoflow Overlay</title>
 </head>
 <body>
-    <div id="header" vff-template="header">
-        <h1 vff-name="title" id="title">Welcome to Videoflow</h1>
-        <h2 vff-name="subtitle" id="subtitle">to get started with Videoflow Framework (VFF), go to the<a target="_blank" href="https://www.videoflow.io/documentation/api/vff">VFF documentation</a></h2>
+    <div id="header">
+        <h1 vff-control="header.title" id="title">Welcome to Videoflow</h1>
+        <h2 vff-control="header.subtitle" id="subtitle">to get started with Videoflow Framework (VFF), go to the<a target="_blank" href="https://www.videoflow.io/documentation/api/vff">VFF documentation</a></h2>
     </div>
 </body>
 </html>

@@ -3,47 +3,48 @@
 <header>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://rawgit.com/TwiztedDesign/vff/master/dist/vff.js"></script>
+    <script src="https://unpkg.com/vff"></script>
 
     <title>Videoflow Overlay</title>
 </header>
 <body>
 <main>
-    <div id="animation-1" class="animation" vff-template="lowerThird1">
+    <div id="animation-1" class="animation">
         <div class="red">/</div>
         <div class="white light mask">
-            <div vff-name="firstName">Frederic</div>
+            <span vff-control="lowerThird1.firstName">Frederic</span>
         </div>
         <div class="white light mask">
-            <div vff-name="lastName">Colins</div>
+            <span vff-control="lowerThird1.lastName">Colins</span>
         </div>
     </div>
 
-    <div id="animation-2" class="animation" vff-template="lowerThird2">
+    <div id="animation-2" class="animation">
         <div class="red bold arimo mask">
-            <div vff-name="fullName">John Doe</div>
+            <span vff-control="lowerThird2.fullName">John Doe</span>
         </div>
         <div class="white light mask">
-            <div vff-name="position">Motion Designer</div>
+            <span vff-control="lowerThird2.position">Motion Designer</span>
         </div>
     </div>
 
-    <div id="animation-3" class="animation" vff-template="lowerThird3">
+    <div id="animation-3" class="animation">
         <div class="white light mask">
-            <div vff-name="firstName">Sarah</div>
-        </div><div class="red bold arimo mask">
-        <div vff-name="lastName">Brown</div>
-    </div>
+            <span vff-control="lowerThird3.firstName">Sarah</span>
+        </div>
+        <div class="red bold arimo mask">
+            <span vff-control="lowerThird3.lastName">Brown</span>
+        </div>
     </div>
 
-    <div id="animation-4" class="animation" vff-template="lowerThird4">
+    <div id="animation-4" class="animation">
         <div class="white bold arimo mask">
-            <div vff-name="fullName">John Doe</div>
+            <div vff-control="lowerThird4.fullName">John Doe</div>
         </div>
         <div class="mask"><div></div></div>
     </div>
 
-    <div id="animation-5" class="animation" vff-template="lowerThird5">
+    <div id="animation-5" class="animation">
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
             <defs>
                 <clipPath id="mask-bottom-right">
@@ -64,10 +65,10 @@
             <line class="bottom-left" x1="0" y1="100%" x2="30%" y2="100%"/>
         </svg>
         <div class="white bold arimo mask">
-            <div vff-name="fullName">Nathan Fillion</div>
+            <span vff-control="lowerThird5.fullName">Nathan Fillion</span>
         </div>
         <div class="white mask">
-            <div vff-name="position">Director</div>
+            <span vff-contorl="lowerThird5.position">Director</span>
         </div>
     </div>
 </main>

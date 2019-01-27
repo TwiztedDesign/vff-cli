@@ -11,7 +11,6 @@ const questions = [
 ];
 
 module.exports = function () {
-    console.log(environmentsKeys);
     inquirer
         .prompt(questions)
         .then(function (answers) {
