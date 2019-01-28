@@ -28,7 +28,6 @@
         "dstPort": 80,
         "srcHost": "localhost",
         "srcPort": 5454,
-        "tryKeyboard" : true,
-        "keepaliveInterval" : 1000
+        "tryKeyboard" : true
     }
 }

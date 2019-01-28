@@ -23,6 +23,7 @@ module.exports = (directory) => {
     let path = dir + (directory.path || '');
     let entry = directory.entry || descriptor? descriptor.main : null || 'index.html';
 
+
     browserSync.init({
         server  : true,
         port    : port,
@@ -42,7 +43,7 @@ module.exports = (directory) => {
 
 
             try{
-                tunnel.start({srcPort: port}).then(url => {
+                tunnel.start({srcPort: port, dstHost: `vff-${descriptor.serve_id}`}).then(url => {
                     logger.info('Remote:           ' + url);
                     vf.serve(url,descriptor)
                         .then((res) => {
