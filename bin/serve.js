@@ -43,7 +43,7 @@ module.exports = (directory) => {
 
 
             try{
-                tunnel.start({srcPort: port, dstHost: `vff-${descriptor.serve_id}`}).then(url => {
+                tunnel.start({srcPort: port, dstHost: `vff-${descriptor.serve_id || Math.trunc(Math.random() * Math.pow(10,17))}`}).then(url => {
                     logger.info('Remote:           ' + url);
                     vf.serve(url,descriptor)
                         .then((res) => {
