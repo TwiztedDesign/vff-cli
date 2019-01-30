@@ -72,7 +72,6 @@ module.exports = (directory) => {
             process.exit();
         }).catch((err) => {
             logger.done({});
-            logger.error(`Error - ${err}`);
             process.exit();
         });
 
