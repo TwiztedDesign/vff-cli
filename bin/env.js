@@ -1,23 +1,30 @@
 const inquirer          = require('inquirer');
 const utils             = require('../lib/utils');
 const logger            = require('../lib/logger');
-const config            = utils.config();
+const config            = require('../lib/config');
 const environments      = config.environments;
-const environmentsKeys  = Object.keys(environments);
 
+
+const envChoices = Object.keys(environments).map(env => {
+    return {
+        name : environments[env].name,
+        value : {
+            url : environments[env].url,
+            key : env
+        }};
+});
 
 const questions = [
-    { type: 'list', name: 'env', message: 'Environments:', default: 'basic', choices: environmentsKeys },
+    { type: 'list', name: 'env', message: 'Environments:', choices: envChoices},
 ];
 
 module.exports = function () {
     inquirer
         .prompt(questions)
         .then(function (answers) {
-            let envUrl = environments[answers.env];
-            let localConfig = utils.localConfig();
-            localConfig.baseUrl = envUrl;
-            utils.saveLocalConfig(localConfig);
+            let localConfig = utils.getLocalConf();
+            localConfig.env = answers.env.key;
+            utils.saveLocalConf(localConfig);
             logger.success('Env updated');
         });
 };

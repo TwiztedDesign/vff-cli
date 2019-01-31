@@ -1,7 +1,6 @@
 const logger        = require('../lib/logger');
 const vf            = require('../lib/vf');
 const utils         = require('../lib/utils');
-const config        = utils.config();
 
 module.exports = function () {
 
@@ -11,5 +10,5 @@ module.exports = function () {
         logger.info("Not logged in");
     });
 
-    logger.info("Server URL: " + config.baseUrl);
+    logger.info("Server URL: " + utils.getBaseUrl());
 };

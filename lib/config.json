@@ -1,10 +1,17 @@
 {
     "baseUrl": "https://www.videoflow.io/",
-    "environments": {
-        "Development": "http://localhost:3002/",
-        "Production": "https://www.videoflow.io/"
+    "environments"  : {
+        "prod"      : {
+            "name"  : "Production",
+            "url"   : "https://www.videoflow.io/"
+        },
+        "dev"       : {
+            "name": "Development",
+            "url" : "http://localhost:3002/"
+        }
     },
-    "credentials": "/vffcred.json",
+
+    "localConfFilename": "/vffconf.json",
     "defaultServePort": 5454,
     "keepAliveInterval": 60000,
     "tearDownTimeout": 5000,
