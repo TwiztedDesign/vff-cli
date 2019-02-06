@@ -6,6 +6,7 @@ const messages                      = config.messages;
 const maxFileSizeForDeployInMb      = config.maxFileSizeForDeployInMb;
 const fs                            = require('fs');
 const path                          = require('path');
+const inquirer                      = require('inquirer');
 const kbInMb                        = 1000000;
 
 const STATUS_ACTIVE     = 'active';
@@ -43,7 +44,35 @@ module.exports = function () {
                         utils.delete(path.resolve('./') + '/' + archiveName + '.' + archiveExtension);
                     }).catch(err => {
                         logger.error(err);
-                    }).then(logger.done);
+                    }).then(() => {
+                        logger.done();
+                        if(res.data.overlay.name_changed && !descriptor.norename){
+                            logger.warn('The overlay was renamed in Videoflow');
+                            inquirer
+                                .prompt({ type: 'list', name: 'change', message: 'Do you want to change the name in the vff.json file:', choices: [
+                                        {name : "Yes", value : "yes"},
+                                        {name : "No", value : "no"},
+                                        {name : "No, and don't ask me again", value : "never"},
+                                    ]},)
+                                .then(function (answers) {
+                                    switch (answers.change){
+                                        case 'yes':
+                                            descriptor.name = res.data.overlay.name;
+                                            descriptor.vff_name = res.data.overlay.name;
+                                            utils.saveDescriptor(descriptor);
+                                            logger.info("The overlay was renamed in vff.json");
+                                            break;
+                                        case 'no':
+                                            break;
+                                        case 'never':
+                                            descriptor.norename = true;
+                                            utils.saveDescriptor(descriptor);
+                                            logger.info("You won't be bothered with this again");
+                                            break;
+                                    }
+                                });
+                        }
+                    });
                 }
             });
         }).catch(err => {

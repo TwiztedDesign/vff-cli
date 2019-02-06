@@ -11,6 +11,7 @@ module.exports = function () {
     inquirer
         .prompt(questions)
         .then(function (answers) {
+            answers.vff_name = answers.name;
             utils.saveDescriptor(answers);
         });
 };
