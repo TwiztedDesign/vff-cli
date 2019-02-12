@@ -13,7 +13,7 @@ VFF Cli let you develop and deploy you overly projects. It's built on top of [VF
 ## Installation
 There are two option to install vff cli tool:
 - Windows\Linux\macOS:
-    1. Get npm [link](https://www.npmjs.com/get-npm)
+    1. Get [npm](https://www.npmjs.com/get-npm)
     1. Run the following command `npm install -g vff-cli`
     1. You are ready to go
 - Windows
@@ -104,31 +104,27 @@ You will be prompt for a few questions such as project name, and which boilerpla
 
 #### Boilerplates
 - Basic - Basic overlay boilerplarte
-    
-    
+```
     .
     ├── css                   # Style folder
     ├── js                    # Js files folder
     ├── index.html            # Main index.html file
     └── vff.json              # vff-cli config file - don't change it
-  
+```
 - lower-third - Basic lower-third overlays with animation
-     
-     
+``` 
     .
     ├── css                   # Style folder
     ├── index.html            # Main index.html file
     └── vff.json              # vff-cli config file - don't change it 
-    
- 
+ ```
 - avengers - Don't ask:) Just try it out
-     
-     
+``` 
     .
     ├── css                   # Style folder
     ├── index.html            # Main index.html file
     └── vff.json              # vff-cli config file - don't change it 
-    
+```
        
 ### serve
 Serve command is the way to develop and test your overlay on Videoflow platform
