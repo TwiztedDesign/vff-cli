@@ -1,6 +1,6 @@
 {
   "name": "vff-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "VFF CLI tool",
   "main": "index.js",
   "scripts": {
