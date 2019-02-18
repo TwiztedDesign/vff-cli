@@ -22,7 +22,7 @@ module.exports = (directory) => {
     let port = directory.port || defaultPort;
     let path = dir + (directory.path || '');
     let entry = directory.entry || descriptor? descriptor.main : null || 'index.html';
-
+    let keepAliveInter = {};
 
     browserSync.init({
         server  : true,
@@ -54,6 +54,8 @@ module.exports = (directory) => {
                         .catch((err) => {
                             if(err.response && err.response.status === 401){
                                 logger.warn(messages.serveNoAuth);
+                                //In case the user isn't authenticated, don't run keep alive interval
+                                clearInterval(keepAliveInter);
                             }else{
                                 logger.error(err);
                             }
@@ -105,10 +107,12 @@ module.exports = (directory) => {
     });
 
     //Keep alive loop
-    setInterval(function () {
+    keepAliveInter = setInterval(function () {
         vf.serve('keep_alive', descriptor)
             .catch(err => {
-                logger.error(messages.connectionError);
+                if(err.response && err.response.status !== 401) {
+                    logger.error(messages.connectionError);
+                }
             });
     }, keepAliveInterval);
 };
