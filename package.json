@@ -1,6 +1,6 @@
 {
   "name": "vff-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "VFF CLI tool",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,11 @@
   },
   "author": "Danny Umansky <dok.umansky@twizted-design.com> (http://www.twizted-design.com/)",
   "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/TwiztedDesign/vff-cli.git"
+  },
+  "homepage" : "https://github.com/TwiztedDesign/vff-cli",
   "dependencies": {
     "archiver": "3.0.0",
     "axios": "0.18.0",
