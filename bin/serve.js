@@ -40,15 +40,14 @@ module.exports = (directory) => {
         } else {
             logger.success('Serving: ' + path + '/' + entry);
             logger.info('Local:            http://localhost:' + port);
-
-
             try{
-                tunnel.start({srcPort: port, dstHost: `vff-${descriptor.serve_id || Math.trunc(Math.random() * Math.pow(10,17))}`}).then(url => {
+
+                tunnel.start({srcPort: port, dstHost: `vff-${descriptor[`serve_id${utils.getEnvironmentSuffix()}`] || Math.trunc(Math.random() * Math.pow(10,17))}`}).then(url => {
                     logger.info('Remote:           ' + url);
-                    vf.serve(url,descriptor)
+                    vf.serve(url, descriptor)
                         .then((res) => {
                             let overlay = res.data.overlay;
-                            descriptor.serve_id = overlay.id;
+                            descriptor[`serve_id${utils.getEnvironmentSuffix()}`] = overlay.id;
                             utils.saveDescriptor(descriptor);
                         })
                         .catch((err) => {

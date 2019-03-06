@@ -13,28 +13,45 @@ const questions = [
         { type: 'list', name: 'type', message: 'Type (more coming soon):', default: 'basic', choices: boilerplates },
     ];
 
-module.exports = function () {
-    if(utils.getDescriptor()){
-        return logger.error("Looks like a VFF project has already been created in this folder.");
-    }
+
+function create(directory = ''){
     inquirer
         .prompt(questions)
         .then(function (answers) {
             ncp.limit = 16;
             logger.run('Creating vff project');
-            ncp(path.resolve(__dirname + boilerplatesPath + answers.type), path.resolve('./'), function (err) {
+            ncp(path.resolve(__dirname + boilerplatesPath + answers.type), path.resolve('./' + directory), function (err) {
                 if (err) {
                     console.log(err);
                     return logger.done(err);
                 }
                 answers.main = 'index.html';
                 answers.version = '1.0.0';
+                answers.vff_name = answers.name;
                 delete answers.type;
-                fs.writeFile(path.resolve('./') + '/vff.json', JSON.stringify(answers, null, 4), 'utf8', () => {
+                fs.writeFile(path.resolve('./' + directory) + '/vff.json', JSON.stringify(answers, null, 4), 'utf8', () => {
                     logger.done();
                 });
 
             });
 
         });
+}
+
+module.exports = function (dir, cmd) {
+
+    if(cmd){
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir);
+            questions[0].default = dir;
+            create(dir);
+        } else {
+            logger.error("Directory exists")
+        }
+    } else if(utils.getDescriptor()){
+        logger.error("Looks like a VFF project has already been created in this folder.");
+    } else {
+        create()
+    }
+
 };

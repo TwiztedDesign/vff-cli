@@ -98,9 +98,10 @@ This file is important to sync Videoflow server about the new overlay.
 ### create
 Create command is helping you to create boilerplate out of the box
 ```
-vff create
+vff create [directory]
 ```
 You will be prompt for a few questions such as project name, and which boilerplate.
+If a directory is provided, it will be created, otherwise the overlay will be created in the current location
 
 #### Boilerplates
 - Basic - Basic overlay boilerplarte

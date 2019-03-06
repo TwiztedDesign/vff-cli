@@ -27,7 +27,7 @@ module.exports = function () {
     let descriptor = utils.getDescriptor();
     if(descriptor){
         vf.deploy(descriptor, archiveMime).then(res => {
-            descriptor.id = res.data.overlay.id;
+            descriptor[`id${utils.getEnvironmentSuffix()}`] = res.data.overlay.id;
             utils.saveDescriptor(descriptor);
             logger.run('Compressing');
             utils.zip('**/!(*.'+ archiveExtension +')', archiveName ,() => {
