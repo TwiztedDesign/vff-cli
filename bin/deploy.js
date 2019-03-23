@@ -4,6 +4,7 @@ const vf                            = require('../lib/vf');
 const config                        = require('../lib/config');
 const messages                      = config.messages;
 const maxFileSizeForDeployInMb      = config.maxFileSizeForDeployInMb;
+const maxRetries            = config.maxNumberOfRetries;
 const fs                            = require('fs');
 const path                          = require('path');
 const inquirer                      = require('inquirer');
@@ -38,7 +39,9 @@ module.exports = function () {
                 } else {
                     logger.run('Uploading');
                     const file = fs.readFileSync(filePath);
-                    utils.upload(res.data.upload_url, file, archiveMime).then(() => {
+                    // utils.upload(res.data.upload_url, file, archiveMime).then(() => {
+                    let uploadWithRetries = utils.retry({ attempt: utils.upload, maxRetries });
+                    uploadWithRetries(res.data.upload_url, file, archiveMime).then(() => {
                         descriptor.status = STATUS_ACTIVE;
                         vf.update(descriptor);
                         utils.delete(path.resolve('./') + '/' + archiveName + '.' + archiveExtension);
