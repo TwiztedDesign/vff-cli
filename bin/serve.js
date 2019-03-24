@@ -47,6 +47,9 @@ module.exports = (directory) => {
                     vf.serve(url, descriptor)
                         .then((res) => {
                             let overlay = res.data.overlay;
+                            if(overlay.project && overlay.project.token) {
+                                logger.info('Player:           ' + utils.getBaseUrl() + 'experience/' + overlay.project.token);
+                            }
                             descriptor[`serve_id${utils.getEnvironmentSuffix()}`] = overlay.id;
                             utils.saveDescriptor(descriptor);
                         })
