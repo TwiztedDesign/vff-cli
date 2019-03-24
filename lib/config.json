@@ -16,7 +16,7 @@
     "keepAliveInterval": 60000,
     "tearDownTimeout": 5000,
     "maxFileSizeForDeployInMb": 100,
-    "maxNumberOfRetries": 10,
+    "maxNumberOfRetries": 4,
     "messages": {
         "authSuccess": "Authentication successful",
         "authFail": "Authentication error",
