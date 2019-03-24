@@ -4,7 +4,7 @@ const vf                            = require('../lib/vf');
 const config                        = require('../lib/config');
 const messages                      = config.messages;
 const maxFileSizeForDeployInMb      = config.maxFileSizeForDeployInMb;
-const maxRetries            = config.maxNumberOfRetries;
+const maxRetries                    = config.maxNumberOfRetries;
 const fs                            = require('fs');
 const path                          = require('path');
 const inquirer                      = require('inquirer');
@@ -26,6 +26,7 @@ function validateFileSize(filePath){
 module.exports = function () {
     logger.run("Verifying");
     let descriptor = utils.getDescriptor();
+    let processSucceeded = true;
     if(descriptor){
         vf.deploy(descriptor, archiveMime).then(res => {
             descriptor[`id${utils.getEnvironmentSuffix()}`] = res.data.overlay.id;
@@ -45,9 +46,10 @@ module.exports = function () {
                         vf.update(descriptor);
                         utils.delete(path.resolve('./') + '/' + archiveName + '.' + archiveExtension);
                     }).catch(err => {
+                        processSucceeded = false;
                         logger.error(err);
                     }).then(() => {
-                        logger.done();
+                        processSucceeded? logger.done() : logger.error(messages.deployFailed);
                         if(res.data.overlay.name_changed && !descriptor.norename){
                             logger.warn('The overlay was renamed in Videoflow');
                             inquirer
