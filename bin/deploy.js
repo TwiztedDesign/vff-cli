@@ -40,7 +40,7 @@ module.exports = function () {
                 } else {
                     logger.run('Uploading');
                     const file = fs.readFileSync(filePath);
-                    let uploadWithRetries = utils.retry({ attempt: utils.upload, maxRetries });
+                    let uploadWithRetries = utils.retry(utils.upload, maxRetries);
                     uploadWithRetries(res.data.upload_url, file, archiveMime).then(() => {
                         descriptor.status = STATUS_ACTIVE;
                         vf.update(descriptor);
