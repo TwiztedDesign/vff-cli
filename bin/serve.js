@@ -40,6 +40,7 @@ module.exports = (directory) => {
         } else {
             logger.success('Serving: ' + path + '/' + entry);
             logger.info('Local:            http://localhost:' + port);
+            logger.info('LAN:              http://' + utils.getLocalIP() + ":" + port);
             try{
 
                 tunnel.start({srcPort: port, dstHost: `vff-${descriptor[`serve_id${utils.getEnvironmentSuffix()}`] || Math.trunc(Math.random() * Math.pow(10,17))}`}).then(url => {
