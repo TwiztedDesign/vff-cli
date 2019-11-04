@@ -57,7 +57,7 @@ module.exports = function () {
                                         {name : "Yes", value : "yes"},
                                         {name : "No", value : "no"},
                                         {name : "No, and don't ask me again", value : "never"},
-                                    ]},)
+                                    ]})
                                 .then(function (answers) {
                                     switch (answers.change){
                                         case 'yes':
