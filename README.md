@@ -38,7 +38,7 @@ You will be prompt for a few questions, select "basic" template
 **CONGRATULATIONS**! You have created your first Videoflow overlay.
 
 Let's check that everything looks ok
-- serve the vff project locally
+- serve the vff project locally (**Experimental feature, uses [serveo.net](http://serveo.net) under the hood**)
 ```
 vff serve
 ```
