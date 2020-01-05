@@ -21,7 +21,7 @@ module.exports = (directory) => {
     }
     let port = directory.port || defaultPort;
     let path = dir + (directory.path || '');
-    let entry = directory.entry || descriptor? descriptor.main : null || 'index.html';
+    let entry = directory.entry || (descriptor? descriptor.main : null) || 'index.html';
     let keepAliveInter = {};
 
     browserSync.init({
