@@ -108,7 +108,7 @@ If a directory is provided, it will be created, otherwise the overlay will be cr
 ```
     .
     ├── css                   # Style folder
-    |    └ vff-overlay        # General styles for the overlay layout on various devices
+    |    └ vff-overlay.css    # General styles for the overlay layout on various devices
     ├── js                    # Js files folder
     ├── index.html            # Main index.html file
     └── vff.json              # vff-cli config file - generated automatically
