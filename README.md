@@ -126,19 +126,6 @@ If a directory is provided, it will be created, otherwise the overlay will be cr
     ├── index.html            # Main index.html file
     └── vff.json              # vff-cli config file - don't change it 
 ```
-       
-### serve
-Serve command is the way to develop and test your overlay on Videoflow platform
-```
-vff serve
-```
-**Make sure you are logged in**
-
-Once you served your overlay you will be able to see it on your Videoflow dashboard under the "Overlays" section.
-By clicking the "preview" you will see you overlay in Videoflow player
-By clicking the "controller" you will redirect to the controller screen and then you will see all the exposed controls(by using VFF)
-
-**We are using [browser sync](https://github.com/BrowserSync/browser-sync), so you don't need to refresh on every chage **
 
 ### deploy
 Deploy command allows you to deploy your overlay and make it available for all.
