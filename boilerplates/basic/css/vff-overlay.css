@@ -1,0 +1,27 @@
+.vff-overlay{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+@media (orientation: portrait) {
+    /* Make space for 16:9 video at the top of the mobile display */
+    /* The class vff-mobile is added automatically when Videoflow player loads on a mobile device */
+    .vff-mobile.vff-overlay{
+        top:56.25vw;
+        left:0;
+        right:0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+    }
+}
+
+@media (orientation: landscape) {
+
+}

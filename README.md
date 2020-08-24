@@ -108,23 +108,10 @@ If a directory is provided, it will be created, otherwise the overlay will be cr
 ```
     .
     ├── css                   # Style folder
+    |    └ vff-overlay        # General styles for the overlay layout on various devices
     ├── js                    # Js files folder
     ├── index.html            # Main index.html file
-    └── vff.json              # vff-cli config file - don't change it
-```
-- lower-third - Basic lower-third overlays with animation
-``` 
-    .
-    ├── css                   # Style folder
-    ├── index.html            # Main index.html file
-    └── vff.json              # vff-cli config file - don't change it 
- ```
-- avengers - Don't ask:) Just try it out
-``` 
-    .
-    ├── css                   # Style folder
-    ├── index.html            # Main index.html file
-    └── vff.json              # vff-cli config file - don't change it 
+    └── vff.json              # vff-cli config file - generated automatically
 ```
 
 ### deploy
