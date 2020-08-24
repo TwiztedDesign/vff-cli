@@ -37,29 +37,17 @@ vff create
 You will be prompt for a few questions, select "basic" template
 **CONGRATULATIONS**! You have created your first Videoflow overlay.
 
-Let's check that everything looks ok
-- serve the vff project locally (**Experimental feature, uses [serveo.net](http://serveo.net) under the hood**)
-```
-vff serve
-```
-You can open this link locally [http://localhost:5454](http://localhost:5454)
-Or login to [Videoflow](https://www.videoflow.io) to see your new overlay
-![](http://g.recordit.co/hkEQXHdZbj.gif)
-**NOTE** in order to stop serving the overlay just press 'ctrl c'
-
 Now let's deploy it:
 ```
 vff deploy
 ``` 
 Done.
 
-You're brand new overlay should appear under the 'Overlays' section in your Videoflow dashboard.
+You're brand new overlay should appear under the 'Engagments' section in your Videoflow workflow.
 
 
 ## Commands
-We will elaborate about each command 
-
-BTW, you can always get all the supported commands by pressing
+You can always get all the supported commands by pressing
 ```
 vff -h
 ```
